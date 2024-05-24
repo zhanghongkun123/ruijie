@@ -1,0 +1,77 @@
+package com.ruijie.rcos.rcdc.rco.module.web.ctrl.rco.batchtask;
+
+import org.springframework.util.Assert;
+
+import com.ruijie.rcos.gss.log.module.def.api.BaseAuditLogAPI;
+import com.ruijie.rcos.rcdc.rco.module.def.api.RcdcThemeAPI;
+import com.ruijie.rcos.rcdc.rco.module.def.api.enums.ThemePictureTypeEnum;
+import com.ruijie.rcos.rcdc.rco.module.def.api.request.rcdctheme.UploadPictureRequest;
+import com.ruijie.rcos.rcdc.rco.module.web.ctrl.rco.RcoBusinessKey;
+import com.ruijie.rcos.sk.base.batch.AbstractSingleTaskHandler;
+import com.ruijie.rcos.sk.base.batch.BatchTaskFinishResult;
+import com.ruijie.rcos.sk.base.batch.BatchTaskItem;
+import com.ruijie.rcos.sk.base.batch.BatchTaskItemResult;
+import com.ruijie.rcos.sk.base.batch.BatchTaskItemStatus;
+import com.ruijie.rcos.sk.base.batch.BatchTaskStatus;
+import com.ruijie.rcos.sk.base.batch.DefaultBatchTaskFinishResult;
+import com.ruijie.rcos.sk.base.batch.DefaultBatchTaskItemResult;
+import com.ruijie.rcos.sk.base.exception.BusinessException;
+import com.ruijie.rcos.sk.webmvc.api.request.ChunkUploadFile;
+
+/**
+ *
+ * Description: 上传RCDC背景图
+ * Copyright: Copyright (c) 2018
+ * Company: Ruijie Co., Ltd.
+ * Create Time: 2020年4月08日
+ *
+ * @author nt
+ */
+public class UploadRcdcBackgroundBatchTaskHandler extends AbstractSingleTaskHandler {
+
+
+    private BaseAuditLogAPI auditLogAPI;
+
+    private ChunkUploadFile file;
+
+    private RcdcThemeAPI rcdcThemeAPI;
+
+    public UploadRcdcBackgroundBatchTaskHandler(ChunkUploadFile file, BatchTaskItem batchTaskItem, BaseAuditLogAPI auditLogAPI,
+            RcdcThemeAPI rcdcThemeAPI) {
+        super(batchTaskItem);
+        Assert.notNull(auditLogAPI, "auditLogAPI is not null");
+        Assert.notNull(rcdcThemeAPI, "rcdcThemeAPI is not null");
+        Assert.notNull(file, "file is not null");
+
+        this.file = file;
+        this.auditLogAPI = auditLogAPI;
+        this.rcdcThemeAPI = rcdcThemeAPI;
+    }
+
+    @Override
+    public BatchTaskItemResult processItem(BatchTaskItem batchTaskItem) throws BusinessException {
+        Assert.notNull(batchTaskItem, "batchTaskItem can not be null");
+
+        UploadPictureRequest request = new UploadPictureRequest(file.getFilePath(), ThemePictureTypeEnum.RCDC_BACKGROUND);
+        try {
+            rcdcThemeAPI.uploadPicture(request);
+            auditLogAPI.recordLog(RcoBusinessKey.RCDC_RCO_UPLOAD_RCDC_BACKGROUND_SUCCESS_LOG, file.getFileName());
+            return DefaultBatchTaskItemResult.builder().batchTaskItemStatus(BatchTaskItemStatus.SUCCESS)
+                    .msgKey(RcoBusinessKey.RCDC_RCO_UPLOAD_RCDC_BACKGROUND_RESULT_SUCCESS).msgArgs(new String[] {file.getFileName()}).build();
+        } catch (BusinessException ex) {
+            auditLogAPI.recordLog(RcoBusinessKey.RCDC_RCO_UPLOAD_RCDC_BACKGROUND_FAIL_LOG, ex, file.getFileName(), ex.getI18nMessage());
+            throw new BusinessException(RcoBusinessKey.RCDC_RCO_UPLOAD_RCDC_BACKGROUND_RESULT_FAIL, ex, file.getFileName(), ex.getI18nMessage());
+        }
+    }
+
+    @Override
+    public BatchTaskFinishResult onFinish(int successCount, int failCount) {
+        if (failCount == 0) {
+            return DefaultBatchTaskFinishResult.builder().batchTaskStatus(BatchTaskStatus.SUCCESS)
+                    .msgKey(RcoBusinessKey.RCDC_RCO_UPLOAD_RCDC_BACKGROUND_TASK_SUCCESS).msgArgs(new String[] {file.getFileName()}).build();
+        } else {
+            return DefaultBatchTaskFinishResult.builder().batchTaskStatus(BatchTaskStatus.FAILURE)
+                    .msgKey(RcoBusinessKey.RCDC_RCO_UPLOAD_RCDC_BACKGROUND_TASK_FAIL).msgArgs(new String[] {file.getFileName()}).build();
+        }
+    }
+}

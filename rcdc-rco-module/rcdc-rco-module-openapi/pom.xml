@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>rcdc-rco-module</artifactId>
+        <groupId>com.ruijie.rcos.rcdc.rco.module</groupId>
+        <version>6.0.141-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>rcdc-rco-module-openapi</artifactId>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>com.ruijie.rcos.rcdc.rco.module</groupId>
+            <artifactId>rcdc-rco-module-def</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ruijie.rcos.sk.pagekit</groupId>
+            <artifactId>sk-pagekit-starter</artifactId>
+            <version>${sk-java-sdk.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.ruijie.rcos.base.sysmanage.module</groupId>
+            <artifactId>base-sysmanage-module-impl</artifactId>
+            <version>${base-sysmanage-module.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ruijie.rcos.rcdc.backup.module</groupId>
+            <artifactId>rcdc-backup-module-def</artifactId>
+            <version>${rcdc-backup-module.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ruijie.rcos.rcdc.hciadapter.module</groupId>
+            <artifactId>rcdc-hciadapter-module-def</artifactId>
+            <version>${rcdc-hciadapter-module.version}</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+
+</project>

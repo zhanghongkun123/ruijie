@@ -1,0 +1,10 @@
+/**/target/*
+.settings/
+.project
+.classpath
+.checkstyle
+.DS_Store
+.idea
+*.iml
+*.log
+rcdc-rco-module-deploy/src/main/resources/rebel.xml

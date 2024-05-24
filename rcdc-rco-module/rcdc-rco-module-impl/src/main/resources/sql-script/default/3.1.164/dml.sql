@@ -1,0 +1,1 @@
+DELETE FROM t_rco_user_profile_path_detail WHERE id='709b9106-d5ad-4df2-98fe-c708d37d5dbe';

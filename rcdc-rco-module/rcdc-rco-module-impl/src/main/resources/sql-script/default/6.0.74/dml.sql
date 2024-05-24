@@ -1,0 +1,1 @@
+INSERT INTO t_sk_global_parameter(id, param_key, param_value, default_value, create_time, update_time, version) VALUES ('105cfdbf-72bf-3e4e-8771-81c2c7456aaa', 'uws_qr_code_login_config', '','', now(), now(), 0) on conflict (id) do nothing;

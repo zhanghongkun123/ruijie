@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:sk-connectkit="http://www.ruijie.sk.com/schema/sk-connectkit"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.ruijie.sk.com/schema/sk-connectkit
+                           http://www.ruijie.sk.com/schema/sk-connectkit.xsd">
+    <!-- rcdc server -->
+    <sk-connectkit:service interface="com.ruijie.rcos.rcdc.rco.module.openapi.thrift.kms.KmsServer"
+                           protocol="thrift"
+                           port="9098"
+                           truststore="${rcdc.service.trustfile}"
+                           keystore="${rcdc.service.serverkeyfile}"
+                           clientauth="${rcdc.service.clientauth}"
+                           keypass="${rcdc.service.keypass}"
+                           trustpass="${rcdc.service.trustpass}"
+                           transporter="sslbio">
+    </sk-connectkit:service>
+
+	<sk-connectkit:service base-package="com.ruijie.rcos.rcdc.rco.module.openapi.rest.**"
+                           protocol="rest">
+        <sk-connectkit:interceptor class="com.ruijie.rcos.rcdc.rco.module.impl.interceptor.RestServerModelInterceptor"/>
+    </sk-connectkit:service>
+
+    <!-- rccm rest server -->
+    <sk-connectkit:service interface="com.ruijie.rcos.rcdc.rco.module.openapi.rest.rccm.RccmManageRestServer"
+                           protocol="rest">
+    </sk-connectkit:service>
+
+    <!-- DashboardStatistics rest server -->
+    <sk-connectkit:service interface="com.ruijie.rcos.rcdc.rco.module.openapi.rest.dashboardstatistics.DashboardStatisticsRestServer"
+                           protocol="rest">
+    </sk-connectkit:service>
+
+    <!-- system rest server -->
+    <sk-connectkit:service interface="com.ruijie.rcos.rcdc.rco.module.openapi.rest.system.SystemRestServer"
+                           protocol="rest">
+    </sk-connectkit:service>
+
+    <sk-connectkit:service interface="com.ruijie.rcos.rcdc.rco.module.openapi.rest.unifiedlogin.UnifiedLoginRestServer"
+                           protocol="rest">
+    </sk-connectkit:service>
+
+    <!-- rcacdocking rest server -->
+    <sk-connectkit:service interface="com.ruijie.rcos.rcdc.rco.module.openapi.rest.rcacdocking.RcacDockingRestServer"
+                           protocol="rest">
+    </sk-connectkit:service>
+
+    <!-- clouddock rest server -->
+    <sk-connectkit:service interface="com.ruijie.rcos.rcdc.rco.module.openapi.rest.clouddock.CloudDockRestServer"
+                           protocol="rest">
+    </sk-connectkit:service>
+
+    <sk-connectkit:service interface="com.ruijie.rcos.rcdc.rco.module.openapi.rest.notify.UserEventNotifyServer"
+                           protocol="rest">
+    </sk-connectkit:service>
+
+</beans>

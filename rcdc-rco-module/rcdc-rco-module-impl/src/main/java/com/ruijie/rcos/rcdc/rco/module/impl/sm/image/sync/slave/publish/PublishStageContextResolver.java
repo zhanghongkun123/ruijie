@@ -1,0 +1,18 @@
+package com.ruijie.rcos.rcdc.rco.module.impl.sm.image.sync.slave.publish;
+
+import com.ruijie.rcos.rcdc.rco.module.common.resolver.ContextDtoResolver;
+import com.ruijie.rcos.rcdc.rco.module.def.api.dto.image.PublishSyncingImageTemplateDTO;
+import org.springframework.stereotype.Service;
+
+/**
+ * Description: 发布阶段上下文
+ * Copyright: Copyright (c) 2018
+ * Company: Ruijie Co., Ltd.
+ * Create Time: 2023/6/20
+ *
+ * @author zhiweiHong
+ */
+@Service
+public class PublishStageContextResolver implements ContextDtoResolver<PublishSyncingImageTemplateDTO> {
+
+}

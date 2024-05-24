@@ -1,0 +1,15 @@
+SELECT
+    dpu.id,
+    dpu.disk_pool_id,
+    dpu.related_id,
+    dpu.related_type,
+    dpu.create_time,
+    dpu.VERSION,
+    cu.NAME user_name,
+    cug.NAME user_group_name
+FROM
+    t_rco_disk_pool_user dpu
+        LEFT JOIN t_base_iac_user cu ON dpu.related_id = cu.ID
+        AND dpu.related_type = 'USER'
+        LEFT JOIN t_base_iac_user_group cug ON dpu.related_id = cug.ID
+        AND dpu.related_type = 'USERGROUP';

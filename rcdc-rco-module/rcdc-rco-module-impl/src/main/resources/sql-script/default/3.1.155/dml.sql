@@ -1,0 +1,2 @@
+INSERT INTO "public"."t_sk_global_parameter" ("id", "param_key", "param_value", "default_value", "create_time", "update_time", "version")
+VALUES('00000000-0000-0000-0000-00000000f0f5', 'is_read_user_protocol', 'false', 'false', now(), now(), 0) ON CONFLICT(id) DO NOTHING;

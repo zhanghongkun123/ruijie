@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:sk-connectkit="http://www.ruijie.sk.com/schema/sk-connectkit"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.ruijie.sk.com/schema/sk-connectkit
+                           http://www.ruijie.sk.com/schema/sk-connectkit.xsd">
+
+    <!--mq配置 生产者-->
+    <sk-connectkit:reference
+            base-package="com.ruijie.rcos.rcdc.rco.module.impl.datacollect.connector.mq.api"
+            address="${rabbitmq.rabbitmqserver.servername}"
+            port="${rabbitmq.rabbitmqserver.port}"
+            username="${rabbitmq.rabbitmqserver.username}"
+            password="${rabbitmq.rabbitmqserver.password}"
+            clientauth="${rabbitmq.rabbitmqserver.clientauth}"
+            trustpass="${rabbitmq.rabbitmqserver.trustpass}"
+            truststore="${rabbitmq.rabbitmqserver.trustfile}"
+            keypass="${rabbitmq.rabbitmqserver.keypass}"
+            keystore="${rabbitmq.rabbitmqserver.clientkeyfile}"
+            protocol="amqp"
+            retries="3"/>
+
+	<!--mq配置 消费者-->
+    <sk-connectkit:service
+            base-package="com.ruijie.rcos.rcdc.rco.module.impl.datacollect.connector.mq.spi"
+            address="${rabbitmq.rabbitmqserver.servername}"
+            port="${rabbitmq.rabbitmqserver.port}"
+            username="${rabbitmq.rabbitmqserver.username}"
+            password="${rabbitmq.rabbitmqserver.password}"
+            clientauth="${rabbitmq.rabbitmqserver.clientauth}"
+            trustpass="${rabbitmq.rabbitmqserver.trustpass}"
+            truststore="${rabbitmq.rabbitmqserver.trustfile}"
+            keypass="${rabbitmq.rabbitmqserver.keypass}"
+            keystore="${rabbitmq.rabbitmqserver.clientkeyfile}"
+            protocol="amqp"
+    />
+
+</beans>

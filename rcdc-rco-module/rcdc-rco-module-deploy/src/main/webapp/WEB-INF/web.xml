@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+                      http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	version="3.1" metadata-complete="false">
+	
+	<servlet-mapping>
+		<servlet-name>springmvc</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	<servlet>
+        <servlet-name>SwaggerDispatcherServlet</servlet-name>
+        <servlet-class>com.ruijie.rcos.rcdc.rco.module.web.config.SwaggerDispatcherServlet</servlet-class>
+    </servlet>
+	<servlet-mapping>
+		<servlet-name>SwaggerDispatcherServlet</servlet-name>
+		<url-pattern>/v2/api-docs-ext</url-pattern>
+		<url-pattern>/v2/api-docs</url-pattern>
+		<url-pattern>/doc.html</url-pattern>
+		<url-pattern>/swagger-resources</url-pattern>
+		<url-pattern>/swagger-resources/configuration/ui</url-pattern>
+		<url-pattern>*.css</url-pattern>
+		<url-pattern>*.js</url-pattern>
+		<url-pattern>*.png</url-pattern>
+	</servlet-mapping>
+</web-app>

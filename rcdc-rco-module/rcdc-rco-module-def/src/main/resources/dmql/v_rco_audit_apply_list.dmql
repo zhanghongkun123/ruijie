@@ -1,0 +1,33 @@
+SELECT
+     afa.id,
+     afa.apply_serial_number,
+     afa.apply_reason,
+     afa.total_file_size,
+     afa.total_file_count,
+     afa.total_file_page,
+     afa.apply_type,
+     afa.state,
+     afa.alarm_ids,
+     afa.user_id,
+     afa.user_name,
+     afa.desktop_id,
+     afa.desktop_name,
+     afa.desktop_mac,
+     afa.desktop_ip,
+     afa.terminal_id,
+     afa.terminal_name,
+     afa.terminal_ip,
+     afa.terminal_mac,
+     afa.terminal_type,
+     afa.create_time,
+     afa.update_time,
+     afa.version,
+     afa.fail_reason,
+     afa.file_name,
+     afa.desktop_pool_id,
+     afa.desktop_pool_type,
+     tcug.id group_id,
+     tcug.name group_name
+FROM t_rco_audit_apply afa
+left join t_base_iac_user tcu on afa.user_id = tcu.id
+left join t_base_iac_user_group tcug on tcu.group_id = tcug.id;

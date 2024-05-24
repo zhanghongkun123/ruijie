@@ -1,0 +1,47 @@
+select
+	tcbdt2.id,
+	tcbdt2.backup_id,
+	tcbdt2.name,
+	a.resource_id ,
+	tcbdt2.backup_type,
+	tcbdt2.meta_type,
+	a.backup_num,
+	tcbdt2.create_time last_backup_time,
+	b.size file_size,
+	tcbdt2.external_storage_name
+from
+	(
+	select
+		tcbdt.resource_id ,
+		count(tcbdt.*) backup_num
+	from
+		t_cbb_backup_detail tcbdt
+	where
+		tcbdt.backup_state = 'DONE'
+	group by
+		tcbdt.resource_id )a
+left join
+t_cbb_backup_detail tcbdt2 on
+	tcbdt2.resource_id = a.resource_id
+	and tcbdt2.create_time in
+(
+	select
+		MAX(create_time)
+	from
+		t_cbb_backup_detail
+    where
+        backup_state = 'DONE'
+	group by
+		resource_id)
+left join (
+	select
+		tcbdt.resource_id,
+		sum(tcbfd."size") size
+	from
+		t_cbb_backup_detail tcbdt
+	left join t_cbb_backup_file_detail tcbfd on
+		tcbdt.id = tcbfd.backup_detail_id
+	group by
+		tcbdt.resource_id
+)b on
+	a.resource_id = b.resource_id

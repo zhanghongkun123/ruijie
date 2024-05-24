@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.ruijie.rcos.rcdc.rco.module</groupId>
+    <artifactId>rcdc-rco-module</artifactId>
+    <version>6.0.141-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>rcdc-rco-module-def</artifactId>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.ruijie.rcos.sk.connectkit</groupId>
+      <artifactId>sk-connectkit-starter-tcp</artifactId>
+      <version>${skyengine.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.ruijie.rcos.rcdc.codec.adapter</groupId>
+      <artifactId>rcdc-codec-adapter-server</artifactId>
+      <version>${rcdc-codec-adapter.version}</version>
+    </dependency>
+
+    <!--Radius client组件-->
+    <dependency>
+      <groupId>net.jradius</groupId>
+      <artifactId>jradius-client</artifactId>
+      <version>1.1.5</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.slf4j</groupId>
+          <artifactId>slf4j-log4j12</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.bouncycastle</groupId>
+          <artifactId>bcprov-jdk15</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>commons-beanutils</groupId>
+          <artifactId>commons-beanutils</artifactId>
+        </exclusion>
+        <exclusion>
+          <artifactId>log4j</artifactId>
+          <groupId>log4j</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
+    <dependency>
+      <groupId>commons-beanutils</groupId>
+      <artifactId>commons-beanutils</artifactId>
+      <version>1.9.4</version>
+    </dependency>
+    <dependency>
+      <groupId>com.ruijie.rcos.rcdc.hciadapter.module</groupId>
+      <artifactId>rcdc-hciadapter-module-def</artifactId>
+      <version>${rcdc-hciadapter-module.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.ruijie.rcos.rcdc.rca.module</groupId>
+      <artifactId>rcdc-rca-module-def</artifactId>
+      <version>${rcdc-rca-module.version}</version>
+    </dependency>
+
+  </dependencies>
+
+
+</project>
+

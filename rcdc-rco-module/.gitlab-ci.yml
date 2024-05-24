@@ -1,0 +1,8 @@
+sonar_preview:
+  stage: test
+  script:
+    - git merge $CI_COMMIT_SHA --no-commit --no-ff
+    - bash ci/sonar_preview.sh
+  tags:
+    - hwy
+

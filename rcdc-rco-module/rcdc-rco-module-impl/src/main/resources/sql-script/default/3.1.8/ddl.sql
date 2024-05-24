@@ -1,0 +1,9 @@
+-- t_rco_user_identity_config的related_id建立索引
+DROP INDEX IF EXISTS RELATED_ID_INDEX;
+CREATE INDEX RELATED_ID_INDEX ON T_RCO_USER_IDENTITY_CONFIG(RELATED_ID);
+
+DROP INDEX IF EXISTS rcdc_t_terminal_online_situation_hour_record_index;
+CREATE INDEX rcdc_t_terminal_online_situation_hour_record_index ON t_terminal_online_situation_hour_record (terminal_id);
+
+DROP INDEX IF EXISTS rcdc_t_terminal_online_situation_day_record_index;
+CREATE INDEX rcdc_t_terminal_online_situation_day_record_index ON t_terminal_online_situation_day_record (terminal_id);

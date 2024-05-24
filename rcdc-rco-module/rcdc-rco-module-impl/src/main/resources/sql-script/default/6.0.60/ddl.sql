@@ -1,0 +1,1 @@
+alter table t_rco_user_terminal add column if not exists terminal_platform varchar(16);

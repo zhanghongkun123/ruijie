@@ -1,0 +1,40 @@
+package com.ruijie.rcos.rcdc.rco.module.impl.sms;
+
+/**
+ * Description: 短信相关key
+ * Copyright: Copyright (c) 2023
+ * Company: Ruijie Co., Ltd.
+ * Create Time: 2023/6/8
+ *
+ * @author TD
+ */
+public interface SmsBusinessKey {
+
+    /**
+     * HTTPS客户端初始化失败
+     */
+    String RCDC_HTTPS_CLIENT_INITIAL_FAIL = "23200604";
+    
+    String RCDC_RCO_TEST_SMS_TEMPLATE_CONTENT = "rcdc_rco_test_sms_template_content";
+    String RCDC_RCO_SMS_GATEWAY_NOT_OPEN_ERROR = "23200366";
+    String RCDC_RCO_SMS_VERIFY_CODE_EXPIRED_ERROR = "23200367";
+    String RCDC_RCO_USER_SMS_VERIFY_CODE_REFRESH_ERROR = "23200368";
+    String RCDC_RCO_SMS_VERIFY_CODE_MUST_EQUAL = "23200369";
+    String RCDC_RCO_GLOBAL_SMS_AUTH_NOT_OPEN_ERROR = "23200370";
+    String RCDC_RCO_SMS_PWD_RECOVER_NOT_OPEN_ERROR = "23200371";
+    String RCDC_RCO_USER_NOT_BIND_PHONE_NUMBER_ERROR = "23200372";
+    String RCDC_RCO_USER_PHONE_NOT_NULL_ERROR = "23200373";
+    String RCDC_RCO_USER_NOT_OPEN_SMS_AUTH_ERROR = "23200374";
+    String RCDC_RCO_SMS_SEND_PHONE_NUMBER_NOT_NULL_ERROR = "23200375";
+    String RCDC_RCO_USER_NON_LOCAL_PERSONAL_NOT_SUPPORTED_MODIFY_PWD = "23200376";
+    String RCDC_RCO_PHONE_SMS_VERIFY_CODE_DAY_NUMBER_EXCEED_MAX_LIMIT = "23200377";
+    String RCDC_RCO_SMS_AUTH_NOT_SUPPORT_VISITOR_USER_ERROR = "23200378";
+    String RCDC_RCO_SEND_SMS_PHONE_BIND_PHONE_NO_EQUAL_ERROR = "23200379";
+    String RCDC_RCO_BIND_PHONE_NOT_SUPPORT_VISITOR_USER_ERROR = "23200380";
+    String RCDC_RCO_SMS_SEND_FAIL_ERROR = "23200381";
+    String RCDC_RCO_SMS_SERVER_CONNECT_FAIL = "23200382";
+    String RCDC_RCO_SMS_SEND_CONTENT_ENCODING_ERROR = "23200383";
+    String RCDC_RCO_QUARTZ_MESSAGE_NOTICE_LOG_CLEAN = "rcdc_rco_quartz_message_notice_log_clean";
+    String RCDC_RCO_QUARTZ_EXTERNAL_MESSAGE_LOG_CLEAN_FINISH = "rcdc_rco_quartz_external_message_log_clean_finish";
+    String RCDC_RCO_USER_BIND_PHONE_NUMBER_SUCCESS = "rcdc_rco_user_bind_phone_number_success";
+}

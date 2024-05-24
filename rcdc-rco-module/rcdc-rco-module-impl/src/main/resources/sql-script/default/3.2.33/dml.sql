@@ -1,0 +1,2 @@
+INSERT INTO t_sk_global_parameter(id, param_key, param_value, default_value, create_time, update_time, version)
+VALUES ('9bf24ce1-999d-42db-8453-92be9c41c08e', 'app_delivery_record_expire_month', '3', '3', now(), now(), 0) ON CONFLICT(id) DO NOTHING;

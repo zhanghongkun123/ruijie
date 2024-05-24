@@ -1,0 +1,1 @@
+update t_rco_image_download_state set terminal_download_finish_time = download_finish_time where download_state = 'SUCCESS';

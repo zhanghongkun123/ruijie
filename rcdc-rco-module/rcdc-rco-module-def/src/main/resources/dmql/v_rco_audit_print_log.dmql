@@ -1,0 +1,46 @@
+select
+	trafpi.id id,
+	traa.id apply_id,
+	traa.apply_serial_number apply_serial_number,
+	traa.state apply_state,
+	traa.total_file_count total_file_count,
+	traa.total_file_size total_file_size,
+	traa.apply_reason apply_reason,
+	traa.user_id user_id,
+	traa.user_name user_name,
+	tcug.id group_id,
+	tcug.name group_name,
+	traa.desktop_id desktop_id,
+	traa.desktop_name desktop_name,
+	traa.desktop_mac desktop_mac,
+	traa.desktop_ip desktop_ip,
+	traa.terminal_id terminal_id,
+	traa.terminal_name terminal_name,
+	traa.terminal_ip terminal_ip,
+	traa.terminal_mac terminal_mac,
+	traa.terminal_type terminal_type,
+	traa.fail_reason,
+	traf.id file_id,
+	traf.file_name file_name,
+	traf.file_state file_state,
+	traf.file_server_storage_path file_server_storage_path,
+	trafpi.printer_name printer_name,
+	trafpi.print_process_name print_process_name,
+	trafpi.print_page_count print_page_count,
+	trafpi.print_time print_time,
+	trafpi.print_paper_size print_paper_size,
+	trafpi.print_state print_state,
+	trafpi.print_result_msg print_result_msg,
+	trafpi.version
+from
+	t_rco_audit_apply traa
+left join t_rco_audit_file traf on
+	traa.id = traf.apply_id
+left join t_rco_audit_file_print_info trafpi on
+	traf.id = trafpi.file_id
+left join t_base_iac_user tcu on
+    traa.user_id = tcu.id
+left join t_base_iac_user_group tcug on
+    tcu.group_id = tcug.id
+where
+	apply_type = 'PRINT';

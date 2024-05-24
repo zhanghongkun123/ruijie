@@ -1,0 +1,18 @@
+[{
+  "dependency":{
+    "rcdc-terminal-module-impl":"2.5.25",
+    "rcdc-clouddesktop-module-impl":"2.5.28"
+  },
+  "source":{
+    "dbCode":"default",
+    "beforeMigrateSql":"",
+    "sql":"select user_desk.cbb_desktop_id as desk_id, terminal.product_type as product_type from t_rco_user_desktop user_desk left join t_cbb_terminal terminal on user_desk.terminal_id= terminal.terminal_id;",
+    "afterMigrateSql":""
+  },
+  "dest":{
+    "dbCode":"default",
+    "beforeMigrateSql":"",
+    "sql":"UPDATE t_cbb_user_desktop_op_log SET terminal_type=:product_type WHERE desktop_id=:desk_id;",
+    "afterMigrateSql":""
+  }
+}]

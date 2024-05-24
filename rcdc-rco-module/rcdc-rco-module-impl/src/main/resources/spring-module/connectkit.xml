@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:sk-connectkit="http://www.ruijie.sk.com/schema/sk-connectkit"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.ruijie.sk.com/schema/sk-connectkit
+                           http://www.ruijie.sk.com/schema/sk-connectkit.xsd">
+
+    <!-- 对接RCAC -->
+    <sk-connectkit:reference
+            base-package="com.ruijie.rcos.rcdc.rco.module.impl.filedistribution.connector.*"
+            protocol="rest"
+            data-wrapper="com.ruijie.rcos.rcdc.rco.module.impl.filedistribution.connector.rest.RcacRestDataWrapper"
+            address="${rcac.rcacserver.servername}"
+            port="${rcac.rcacserver.port}"
+            clientauth="${rcac.rcacserver.clientauth}"
+            truststore="${rcac.rcacserver.trustfile}"
+            keystore="${rcac.rcacserver.clientkeyfile}"
+            keypass="${rcac.rcacserver.keypass}"
+            trustpass="${rcac.rcacserver.trustpass}">
+    </sk-connectkit:reference>
+
+    <!--mq配置-->
+    <sk-connectkit:service
+            base-package="com.ruijie.rcos.rcdc.rco.module.impl.spi.mq"
+            address="${rabbitmq.rabbitmqserver.servername}"
+            port="${rabbitmq.rabbitmqserver.port}"
+            username="${rabbitmq.rabbitmqserver.username}"
+            password="${rabbitmq.rabbitmqserver.password}"
+            clientauth="${rabbitmq.rabbitmqserver.clientauth}"
+            trustpass="${rabbitmq.rabbitmqserver.trustpass}"
+            truststore="${rabbitmq.rabbitmqserver.trustfile}"
+            keypass="${rabbitmq.rabbitmqserver.keypass}"
+            keystore="${rabbitmq.rabbitmqserver.clientkeyfile}"
+            protocol="amqp" />
+    <!-- cmsdocking mq -->
+    <sk-connectkit:reference
+            base-package="com.ruijie.rcos.rcdc.rco.module.impl.service.impl.connector.mq.*"
+            address="${rabbitmq.rabbitmqserver.servername}"
+            port="${rabbitmq.rabbitmqserver.port}"
+            username="${rabbitmq.rabbitmqserver.username}"
+            password="${rabbitmq.rabbitmqserver.password}"
+            clientauth="${rabbitmq.rabbitmqserver.clientauth}"
+            trustpass="${rabbitmq.rabbitmqserver.trustpass}"
+            truststore="${rabbitmq.rabbitmqserver.trustfile}"
+            keypass="${rabbitmq.rabbitmqserver.keypass}"
+            keystore="${rabbitmq.rabbitmqserver.clientkeyfile}"
+            protocol="amqp"
+            timeout="500"
+            retries="3"/>
+
+    <!-- clouddock -->
+    <sk-connectkit:reference interface="com.ruijie.rcos.rcdc.rco.module.impl.clouddock.connector.rest.CloudDockRestClient"
+            address="${clouddock.clouddockserver.servername}"
+            protocol="rest"
+            path-prefix="rcdc"
+            port="8443"
+            truststore="${clouddock.clouddockserver.trustfile}"
+            trustpass="${clouddock.clouddockserver.trustpass}"
+            clientauth="${clouddock.clouddockserver.clientauth}"
+            keystore="${clouddock.clouddockserver.clientkeyfile}"
+            keypass="${clouddock.clouddockserver.keypass}"
+            timeout="15000"
+            retries="3"/>
+
+    <!-- 对接tang -->
+    <sk-connectkit:reference
+            base-package="com.ruijie.rcos.rcdc.rco.module.impl.connector.rest.tang"
+            protocol="rest"
+            path-prefix="rccp/rest"
+            port="${rccptang.rccptangserver.port}"
+            address="${rccptang.rccptangserver.servername}"
+            truststore="${rccptang.rccptangserver.trustfile}"
+            trustpass="${rccptang.rccptangserver.trustpass}"
+            clientauth="${rccptang.rccptangserver.clientauth}"
+            keystore="${rccptang.rccptangserver.clientkeyfile}"
+            keypass="${rccptang.rccptangserver.keypass}"
+            timeout="10000"
+            retries="3" />
+
+    <!-- 对接升级子系统 -->
+    <sk-connectkit:reference
+            base-package="com.ruijie.rcos.rcdc.rco.module.impl.upgrade.connector.*"
+            protocol="rest"
+            address="${rccptaiyi.rccptaiyiserver.servername}"
+            port="${rccptaiyi.rccptaiyiserver.port}"
+            clientauth="${rccptaiyi.rccptaiyiserver.clientauth}"
+            truststore="${rccptaiyi.rccptaiyiserver.trustfile}"
+            keystore="${rccptaiyi.rccptaiyiserver.clientkeyfile}"
+            keypass="${rccptaiyi.rccptaiyiserver.keypass}"
+            trustpass="${rccptaiyi.rccptaiyiserver.trustpass}">
+    </sk-connectkit:reference>
+
+    <sk-connectkit:service base-package="com.ruijie.rcos.rcdc.rco.module.impl.connector.tcp.server"
+                           protocol="tcp"
+                           connect-manager="serverConnectManager"
+                           compatible-handler="defaultCompatibleHandler"
+                           router-not-found-handler="defaultMessageHandler"
+    />
+
+
+    <sk-connectkit:reference base-package="com.ruijie.rcos.rcdc.rco.module.impl.connector.tcp.api"
+                             connect-manager="serverConnectManager"
+                             protocol="tcp"
+                             compatible-handler="defaultCompatibleHandler"
+    />
+
+	<bean id="restUtil"
+		  class="com.ruijie.rcos.rcdc.rco.module.impl.util.RestUtil" />
+</beans>

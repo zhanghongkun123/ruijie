@@ -1,0 +1,89 @@
+select
+	distinct tcds.id,
+	tcds.name as strategy_name,
+	tcds.pattern as desktop_type,
+	tcds.system_size as system_disk,
+	tcds.session_type,
+	tcds.is_open_usb_read_only as enable_usb_read_only,
+	tcds.is_open_internet as enable_internet,
+	tcds.is_open_double_screen as enable_double_screen,
+	tcds.ref_count as cloud_number,
+	case
+		when (tcds.state != 'AVAILABLE') then false
+		else true
+	end as can_used,
+	tcds.state as desk_strategy_state,
+	tcds.clip_board_mode,
+	tcds.is_open_desktop_redirect as enable_open_desktop_redirect,
+	tcds.is_allow_local_disk as enable_allow_local_disk,
+	tcds.strategy_type,
+	tcds.remark,
+	case
+		when (trcdcn.computer_name is null) then 'PC'
+		else trcdcn.computer_name
+	end as computer_name,
+	case
+		when (trudc.strategy_id != null
+		or trugdc.strategy_id != null) then true
+		else false
+	end as has_bind_user_or_user_group,
+	tcds.creator_user_name,
+	case
+		when (tcds.enable_disk_mapping is true
+		and tcds.enable_disk_mapping_writeable is true) then 'READ_WRITE'
+		when (tcds.enable_disk_mapping is true
+		and tcds.enable_disk_mapping_writeable is false) then 'READ_ONLY'
+		else 'CLOSED'
+	end as disk_mapping_type,
+	tcds.enable_lan_auto_detection,
+	tcds.desk_create_mode,
+	tcds.power_plan,
+	tcds.power_plan_time,
+	tcds.keyboard_emulation_type,
+	tcds.enable_full_system_disk,
+	tcds.enable_watermark,
+	tcds.watermark_info,
+	tcds.note,
+	tcds.clip_board_support_type,
+	tcds.ip_limit_mode,
+	tcds.ip_limit_info,
+	tcds.desktop_sync_login_account,
+	tcds.desktop_sync_login_account_permission,
+	tcds.desktop_sync_login_password,
+	tcds.enable_ha,
+	tcds.usb_storage_device_mapping_mode,
+	tcds.ha_priority,
+	tcds.strategy_usage,
+	tcds.enable_agreement_agency ,
+	tumd.unified_manage_data_id
+from
+	t_cbb_desk_strategy tcds
+left join (
+	select
+		computer_name,
+		desk_strategy_id
+	from
+		t_rco_cloud_desk_computer_name) trcdcn on
+	trcdcn.desk_strategy_id = tcds.id
+left join (
+	select
+		strategy_id
+	from
+		t_rco_user_desktop_config) trudc on
+	trudc.strategy_id = tcds.id
+left join (
+	select
+		strategy_id
+	from
+		t_rco_user_group_desktop_config) trugdc on
+	trugdc.strategy_id = tcds.id
+left join (
+	select
+		unified_manage_data_id,
+		related_id
+	from
+		t_rco_unified_manage_data
+	where
+		related_type = 'DESK_STRATEGY') tumd
+on
+	tumd.related_id = tcds.id;

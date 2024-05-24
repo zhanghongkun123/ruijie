@@ -1,0 +1,26 @@
+[{
+  "id": "com.ruijie.rcos.base.dbupgrade.module.plugin.spi.PluginSPIImpl",
+  "order": 1,
+  "config": {
+    "source": {
+      "url": "jdbc:postgresql://rccpcangjie:5432/rcdc_rco_default",
+      "username": "rcdcuser",
+      "password": "ENC(S21SR3VRbWl5RWR3NGhTZyFQMZEbRjIooCNlfQKCuJg=)"
+    },
+    "dest": {
+      "dbName": "rcdc_default"
+    },
+    "merge": {
+      "strategy": "skip",
+      "tableList": {
+        "type": "exclude",
+        "dataList": [{
+            "name": "t_rco_global_parameter"
+        }]
+      },
+      "sequenceList": {
+        "type": "all"
+      }
+    }
+  }
+}]
